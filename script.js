@@ -161,6 +161,8 @@ btnAgregar.addEventListener("click", () => {
   const celda = tablaJuego.children[posicion];
   celda.querySelector(".nombre").textContent = nombre;
   mostrarManoSobreElemento(celda);
+
+  reproducirAudio(posicion + 1); // +1 porque los audios van de 1 a 20
 });
 
 btnGenerarTablero.addEventListener("click", crearTablero);
@@ -256,5 +258,11 @@ btnEmpezar.addEventListener("click", async () => {
 
   sortear();
 });
+
+function reproducirAudio(posicion) {
+  const audio = new Audio(`audios/${posicion}.mp3`);
+  audio.currentTime = 0.5; // empieza a reproducir desde el segundo 0.5
+  audio.play();
+}
 
 document.addEventListener("DOMContentLoaded", crearTablero);
