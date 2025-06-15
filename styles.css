@@ -97,7 +97,7 @@ html, body {
 
 /* Fondo del tablero tipo hoja */
 .tablero-container {
-  transform: translateY(-80px) rotateX(45deg);
+  transform: translateY(20px) rotateX(45deg);
   transform-style: preserve-3d;
   background-image: url("fondo_hoja.jpg"); /* Imagen de hoja */
   background-size: cover;
