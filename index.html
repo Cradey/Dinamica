@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulador de Tablero</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="contenedor-fuera">
+    <!-- Controles estilizados -->
+    <div class="controles-externos">
+      <label for="input-nombre">Nombre:</label>
+      <input type="text" id="input-nombre" placeholder="Nombre" />
+
+      <label for="input-posicion">Posición (1-20):</label>
+      <input type="number" id="input-posicion" placeholder="Posición (1-20)" min="1" max="20" />
+
+      <label for="cantidad-cards">Cards a generar:</label>
+      <input type="number" id="cantidad-cards" value="12" min="1" max="20" />
+
+      <label for="select-ganadores">Ganadores:</label>
+      <select id="select-ganadores">
+        <option value="1">1 ganador</option>
+        <option value="2">2 ganadores</option>
+        <option value="3" selected>3 ganadores</option>
+        <option value="4">4 ganadores</option>
+        <option value="5">5 ganadores</option>
+      </select>
+
+      <label for="select-categoria">Categoría de imágenes:</label>
+      <select id="select-categoria">
+        <option value="BLUEY">Bluey</option>
+        <option value="CAPI" selected>Capibara</option>
+        <option value="DB">Dragon Ball</option>
+        <option value="STITCH">Stitch</option>
+        <option value="CORAZONES">Corazones</option>
+      </select>
+
+      <label for="probabilidades">Probabilidades personalizadas:</label>
+      <input type="text" id="probabilidades" placeholder="Ej: 0=50,5=80" />
+
+      <div style="display: flex; gap: 10px;">
+        <div style="flex: 1;">
+          <label for="input-filas">Filas:</label>
+          <input type="number" id="input-filas" value="4" min="1" max="10" />
+        </div>
+        <div style="flex: 1;">
+          <label for="input-columnas">Columnas:</label>
+          <input type="number" id="input-columnas" value="3" min="1" max="10" />
+        </div>
+      </div>
+
+      <label for="texto-previo">Texto previo al sorteo:</label>
+      <input type="text" id="texto-previo" placeholder="Ej: 3 = 15 - 6" />
+      
+      <select id="select-forma" >
+        <option value="cuadrado" selected>Cuadraditos</option>
+        <option value="circulo">Círculos</option>
+      </select>
+
+
+      <button id="btn-agregar">Agregar</button>
+      <button id="btn-empezar">Empezar</button>
+      <button id="btn-terminar">Terminar</button>
+      <button id="btn-limpiar">Limpiar</button>
+      <button id="btn-generar-tablero">Generar tablero</button>
+    </div>
+  </div>
+
+  <!-- Simulador de pantalla 9:16 -->
+  <div class="pantalla">
+    <div class="celular">
+      <div class="pantalla-celular">
+        <div class="bolita-futbol" id="bolita">
+          <span id="numero-actual">0</span>
+        </div>
+      </div>
+    </div>
+
+  <div id="contenedor-ganadores" class="lista-ganadores">
+    <div id="mensaje-previo" class="mensaje-previo">3 = 15 - 6 -3</div>
+    <div id="lista-ganadores"></div>
+  </div>
+
+
+    <div class="tablero-container">
+      <div class="tabla-juego" id="tabla-juego">
+        <!-- Cards se generan en JS -->
+      </div>
+    </div>
+
+    <img id="mano-emoji" class="mano-img" src="mano.png" alt="Mano realista" />
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

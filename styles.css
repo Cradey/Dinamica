@@ -1,0 +1,393 @@
+/* Fondo tipo mesa */
+html, body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Contenedor principal */
+.contenedor-fuera {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+/* Simula el dispositivo */
+.pantalla {
+  width: 400px;
+  height: 711px;
+  background-image: url('fondop.jpg');
+  background-size: cover;
+  border: 10px solid #999;
+  border-radius: 30px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  perspective: 900px;
+  overflow: hidden;
+  position: relative;
+  padding-top: 2px;
+}
+
+/* Parte del celular */
+.celular {
+  width: 200px;
+  height: 100px;
+  background: #111;
+  border: 6px solid #333;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  transform-origin: center;
+}
+
+/* Efecto de brillo sobre pantalla */
+.pantalla::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.25) 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Área interior del celular */
+.pantalla-celular {
+  width: 90%;
+  height: 90%;
+  background: linear-gradient(to bottom, #222, #000);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Pelota */
+.bolita-futbol {
+  width: 100px;
+  height: 100px;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6e/Football_%28soccer_ball%29.svg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
+/* Fondo del tablero tipo hoja */
+.tablero-container {
+  transform: translateY(-80px) rotateX(45deg);
+  transform-style: preserve-3d;
+  background-image: url("fondo_hoja.jpg"); /* Imagen de hoja */
+  background-size: cover;
+  padding: 15px;
+  border-radius: 20px;
+  width: 300px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  margin-top: 0;
+  border: 1px solid #ccc;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.titulo {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+/* Grid de tarjetas */
+.tabla-juego {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+/* Card */
+.celda {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 4px;
+  background-color: #fafafa;
+  text-align: center;
+  font-size: 0.7rem;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(46, 7, 7, 0.05);
+}
+
+/* Datos dentro de la celda */
+.numero {
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.corazon {
+  font-size: 1rem;
+  margin: 2px 0;
+}
+
+.nombre {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Mini checks */
+/* .mini-cuadros {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  margin-top: 4px;
+}
+
+.mini-cuadro {
+  width: 100%;
+  height: 5px;
+  background-color: #ddd;
+  border: 1px solid #ccc;
+}
+
+.mini-cuadro.check {
+  background-color: #4caf50;
+} */
+
+.mini-cuadros {
+  position: absolute;
+  top: 10px;
+  left: 5px; /* Pequeño desplazamiento para que "salga" hacia la izquierda */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mini-cuadro.cuadrado {
+  width: 5px;   /* ahora sí 5px, como quieres */
+  height: 5px;
+  border-radius: 0;  /* Cuadrado */
+  background-color: #ddd;
+  border: 1px solid #999;
+}
+
+.mini-cuadro.circulo {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;  /* Círculo */
+  background-color: #ddd;
+  border: 1px solid #999;
+}
+
+
+
+.mini-cuadro.check {
+  background-color: #4caf50;
+  border-color: #388e3c;
+}
+
+
+
+/* Animación de la mano */
+.mano-img {
+  position: fixed;
+  height: 140px;
+  width: auto;
+  object-fit: contain;
+  pointer-events: none;
+  display: none;
+  z-index: 999;
+  transition: top 0.3s ease, left 0.3s ease;
+}
+
+.animar-mano {
+  transform: scale(1.2);
+}
+
+.puesto {
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  color: transparent;
+}
+
+/* Lista de ganadores */
+.lista-ganadores {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  padding: 10px;
+  background-color: #fffef9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.mensaje-previo {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Estilo para cada ganador */
+.ganador {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: bold;
+  background: #f0f0f0;
+  color: #333;
+  border: 2px solid #ccc;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: aparecerGanador 0.4s ease-in-out;
+  transition: all 0.3s ease;
+}
+
+.ganador.puesto-1 {
+  background-color: #fff8dc;
+  border-color: #ffd700;
+  color: #b8860b;
+}
+
+.ganador.puesto-2 {
+  background-color: #f0f0f0;
+  border-color: #c0c0c0;
+  color: #555;
+}
+
+.ganador.puesto-3 {
+  background-color: #fdf1e0;
+  border-color: #cd7f32;
+  color: #8b4513;
+}
+
+.ganador.puesto-4,
+.ganador.puesto-5 {
+  background-color: #e0f7fa;
+  border-color: #00cccc;
+  color: #007777;
+}
+
+/* Animaciones */
+@keyframes aparecerGanador {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes girarYMostrar {
+  0% {
+    transform: rotate(0deg) scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: rotate(720deg) scale(1.1);
+    filter: brightness(2);
+  }
+  100% {
+    transform: rotate(1080deg) scale(1);
+    filter: brightness(1);
+  }
+}
+
+.bolita-animar {
+  animation: girarYMostrar 1s ease-out;
+}
+
+.girando {
+  animation: spin 0.8s ease-in-out;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(720deg); }
+}
+
+/* Imagen adicional en la tarjeta */
+.imagen-card {
+  width: 60%;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 4px;
+}
+
+/* Controles externos */
+.controles-externos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #ffffffcc;
+  padding: 15px 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+  width: 300px;
+  margin-right: 20px;
+}
+
+.controles-externos label {
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: #333;
+}
+
+.controles-externos input,
+.controles-externos select {
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border 0.2s;
+}
+
+.controles-externos input:focus,
+.controles-externos select:focus {
+  border-color: #0077ff;
+  outline: none;
+}
+
+.controles-externos button {
+  padding: 10px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #0077ff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.controles-externos button:hover {
+  background-color: #005fcc;
+}
