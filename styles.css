@@ -21,6 +21,7 @@ html, body {
   margin: 10px;
 }
 
+
 /* Simula el dispositivo */
 .pantalla {
   width: 400px;
@@ -40,6 +41,50 @@ html, body {
   position: relative;
   padding-top: 2px;
 }
+
+.live-indicador {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: red;
+  font-weight: bold;
+  font-size: 0.9rem;
+  background: white;
+  padding: 2px 6px;
+  border-radius: 10px;
+  animation: parpadeo 1s infinite;
+  z-index: 999;
+}
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+
+.pantalla {
+  position: relative;
+  overflow: hidden; /* Asegura que no se salga el efecto */
+  z-index: 1;
+}
+
+.pantalla::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(240, 82, 82, 0.1), transparent 70%);
+  animation: moverFondo 20s linear infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes moverFondo {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-25%, -25%); }
+  100% { transform: translate(0, 0); }
+}
+
 
 /* Parte del celular */
 .celular {
@@ -97,7 +142,7 @@ html, body {
 
 /* Fondo del tablero tipo hoja */
 .tablero-container {
-  transform: translateY(20px) rotateX(45deg);
+  transform: translateY(40px) rotateX(45deg);
   transform-style: preserve-3d;
   background-image: url("fondo_hoja.jpg"); /* Imagen de hoja */
   background-size: cover;
@@ -111,6 +156,20 @@ html, body {
   position: relative;
   margin-bottom: 10px;
 }
+
+.tablero-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, transparent 50%, #fff 50%);
+  box-shadow: -2px -2px 4px rgba(0,0,0,0.1);
+}
+
+
+
 
 .titulo {
   text-align: center;
