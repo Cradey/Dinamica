@@ -91,9 +91,27 @@ html, body {
   height: 200%;
   background: radial-gradient(circle at center, rgba(240, 82, 82, 0.1), transparent 70%);
   animation: moverFondo 20s linear infinite;
-  z-index: 1;
+  z-index: 5;
   pointer-events: none;
 }
+
+@keyframes fondoGradiente {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 2. FONDO CON PARTÍCULAS ANIMADAS */
+#fondo-particulas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
 
 @keyframes moverFondo {
   0% { transform: translate(0, 0); }
