@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
   <div class="contenedor-fuera">
     <!-- Controles estilizados -->
     <div class="controles-externos">
@@ -71,12 +70,19 @@
 
   <!-- Simulador de pantalla 9:16 -->
   <div class="pantalla">
-    <canvas id="fondo-particulas"></canvas>
-    <!-- Video de fondo -->
-    <video autoplay loop muted playsinline class="video-fondo">
+    
+    <div class="fondo-video">
+      <video autoplay muted loop id="video-fondo">
       <source src="fondo.mp4" type="video/mp4" />
-      Tu navegador no soporta videos.
-    </video>
+          Tu navegador no soporta video.
+      </video>
+    </div>
+    
+    <div class="imagen-estatica">
+      <img src="fondo_estatico.jpg" alt="Zona estática" />
+    </div>
+
+    <canvas id="fondo-particulas"></canvas>
     <div class="celular">
       <div class="pantalla-celular">
         <div class="bolita-futbol" id="bolita">
