@@ -309,5 +309,50 @@ window.addEventListener('resize', () => {
   canvas.height = window.innerHeight;
 });
 
+function configurarFondoCamara() {
+  const video = document.getElementById('camara-fondo');
+  const fondoCamara = document.querySelector('.fondo-camara');
+  const imagenEstatica = document.querySelector('.imagen-estatica');
+  const chkCamara = document.getElementById('activar-camara');
 
-document.addEventListener("DOMContentLoaded", crearTablero);
+  if (chkCamara && chkCamara.checked) {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+      .then(stream => {
+        video.srcObject = stream;
+        fondoCamara.classList.remove('falla');
+        fondoCamara.style.display = 'block';
+        imagenEstatica.style.top = '30vh';
+        imagenEstatica.style.height = '70vh';
+      })
+      .catch(err => {
+        console.warn("No se pudo acceder a la cámara, se mostrará solo la imagen.");
+        fondoCamara.classList.add('falla');
+        fondoCamara.style.display = 'none';
+        imagenEstatica.style.top = '0';
+        imagenEstatica.style.height = '100vh';
+        chkCamara.checked = false; // desmarca si falla
+      });
+  } else {
+    // Si no está activado el checkbox, mostrar solo imagen
+    if (video.srcObject) {
+      video.srcObject.getTracks().forEach(track => track.stop());
+    }
+    video.srcObject = null;
+    fondoCamara.style.display = 'none';
+    imagenEstatica.style.top = '0';
+    imagenEstatica.style.height = '100vh';
+  }
+}
+
+// Ejecutar al cargar y al cambiar el checkbox
+document.addEventListener("DOMContentLoaded", () => {
+  crearTablero();
+  configurarFondoCamara();
+
+  const chkCamara = document.getElementById('activar-camara');
+  if (chkCamara) {
+    chkCamara.addEventListener('change', configurarFondoCamara);
+  }
+});
+
+
