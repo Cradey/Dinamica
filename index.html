@@ -51,6 +51,7 @@
         </div>
       </div>
 
+
       <label for="texto-previo">Texto previo al sorteo:</label>
       <input type="text" id="texto-previo" placeholder="Ej: 3 = 15 - 6" />
       
@@ -59,6 +60,10 @@
         <option value="circulo">Círculos</option>
       </select>
 
+      <label>
+    <input type="checkbox" id="activar-camara" />
+      Usar cámara
+    </label>
 
       <button id="btn-agregar">Agregar</button>
       <button id="btn-empezar">Empezar</button>
@@ -71,13 +76,12 @@
   <!-- Simulador de pantalla 9:16 -->
   <div class="pantalla">
     
-    <div class="fondo-video">
-      <video autoplay muted loop id="video-fondo">
-      <source src="fondo.mp4" type="video/mp4" />
-          Tu navegador no soporta video.
-      </video>
+    <!-- Cámara (si funciona) o fondo llamativo -->
+    <div class="fondo-camara">
+      <video id="camara-fondo" autoplay muted playsinline></video>
     </div>
-    
+
+    <!-- Imagen estática para el 60% inferior o todo si falla la cámara -->
     <div class="imagen-estatica">
       <img src="fondo_estatico.jpg" alt="Zona estática" />
     </div>
@@ -90,6 +94,7 @@
         </div>
       </div>
     </div>
+
 
   <div id="contenedor-ganadores" class="lista-ganadores">
     <div id="mensaje-previo" class="mensaje-previo">3 = 15 - 6 -3</div>
@@ -110,4 +115,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
