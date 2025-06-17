@@ -21,7 +21,6 @@ html, body {
   margin: 10px;
 }
 
-
 /* Simula el dispositivo */
 .pantalla {
   width: 400px;
@@ -42,39 +41,53 @@ html, body {
   padding-top: 2px;
 }
 
-.fondo-video {
+/* Cámara ocupa el 40% superior */
+.fondo-camara {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 45vh; /* Ocupa el 40% superior */
+  height: 30vh;
   overflow: hidden;
   z-index: -1;
+  background: #111; /* fallback oscuro */
 }
 
-.fondo-video video {
+.fondo-camara.falla {
+  background: linear-gradient(135deg, #ff0088, #ffcc00);
+  background-size: 400% 400%;
+  animation: fondoLlamativo 10s ease infinite;
+}
+
+.fondo-camara video {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-
-
+/* Imagen estática ocupa el 60% inferior o 100% si la cámara falla */
 .imagen-estatica {
   position: fixed;
-  bottom: 0;
+  top: 40vh;
   left: 0;
   width: 100vw;
-  height: 50vh; /* Ocupa el 60% inferior */
-  overflow: hidden;
+  height: 70vh;
   z-index: 0;
+  overflow: hidden;
   pointer-events: none;
+  transition: top 0.5s ease, height 0.5s ease;
 }
 
 .imagen-estatica img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+@keyframes fondoLlamativo {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 
@@ -160,6 +173,7 @@ html, body {
   align-items: center;
   box-shadow: 0 10px 25px rgba(0,0,0,0.4);
   transform-origin: center;
+  z-index: 1;
 }
 
 /* Efecto de brillo sobre pantalla */
@@ -183,6 +197,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 /* Pelota */
@@ -217,6 +232,7 @@ html, body {
   box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
   position: relative;
   margin-bottom: 10px;
+  z-index: 1;
 }
 
 .tablero-container::after {
@@ -237,6 +253,7 @@ html, body {
   text-align: center;
   margin-bottom: 10px;
   font-size: 1rem;
+  z-index: 1;
 }
 
 /* Grid de tarjetas */
@@ -244,6 +261,7 @@ html, body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 6px;
+  z-index: 1;
 }
 
 /* Card */
@@ -344,6 +362,7 @@ html, body {
 }
 
 .puesto {
+  z-index: 1;
   font-weight: bold;
   font-size: 0.9rem;
   margin-top: 5px;
@@ -352,6 +371,7 @@ html, body {
 
 /* Lista de ganadores */
 .lista-ganadores {
+  z-index: 1;
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -366,6 +386,7 @@ html, body {
 }
 
 .mensaje-previo {
+  z-index: 1;
   font-size: 1.2rem;
   font-style: italic;
   color: #333;
@@ -374,6 +395,7 @@ html, body {
 
 /* Estilo para cada ganador */
 .ganador {
+  z-index: 1;
   padding: 4px 10px;
   border-radius: 20px;
   font-weight: bold;
