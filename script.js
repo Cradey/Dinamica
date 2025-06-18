@@ -24,6 +24,34 @@ const inputFilas = document.getElementById("input-filas");
 const inputColumnas = document.getElementById("input-columnas");
 
 const selectForma = document.getElementById("select-forma"); // Control para elegir forma
+const cursor = document.getElementById('custom-cursor');
+
+document.addEventListener('DOMContentLoaded', () => {
+  const pantalla = document.querySelector('.pantalla'); // Ojo: aquí usamos `querySelector`
+
+  document.addEventListener('mousemove', e => {
+    const rect = pantalla.getBoundingClientRect(); // ⚠️ pantalla debe ser un elemento real
+
+    let x = e.clientX;
+    let y = e.clientY;
+
+
+    // Limitar horizontalmente dentro de .pantalla
+    // if (x < rect.left) x = rect.left;
+    // if (x > rect.right) x = rect.right;
+
+    // Limitar verticalmente SOLO A LA MITAD INFERIOR
+    const mitad = rect.top + rect.height / 2 - 50;
+    if (y < mitad) y = mitad;
+    if (y > rect.bottom) y = rect.bottom;
+
+    const offsetX = cursor.offsetWidth / 2;
+    const offsetY = cursor.offsetHeight / 2;
+
+    cursor.style.transform = `translate(${x - offsetX - 330}px, ${y - offsetY - 50}px)`;
+  });
+});
+
 
 let cardsTotales = 20;
 let totalGanadores = 3;
@@ -69,15 +97,25 @@ function mostrarManoSobreElemento(elemento) {
   if (!elemento) return;
   const rect = elemento.getBoundingClientRect();
   const pantalla = document.querySelector(".pantalla").getBoundingClientRect();
-  mano.style.left = rect.left - pantalla.left + rect.width / 2 - 40 + "px";
-  mano.style.top = rect.top - pantalla.top + rect.height / 2 - 65 + "px";
-  mano.style.display = "block";
-  mano.classList.add("animar-mano");
 
-  setTimeout(() => {
-    mano.classList.remove("animar-mano");
-    mano.style.display = "none";
-  }, 800);
+  mano.style.left = rect.left - pantalla.left + rect.width / 2 + 15 + "px";
+  mano.style.top = rect.top - pantalla.top + rect.height / 2 - 100 + "px";
+  mano.style.display = "block";
+  mano.classList.remove("animar-mano-retorno"); // por si quedó una clase anterior
+  mano.classList.add("animar-mano-subida");
+  
+  // Cuando termina la animación de subida, hacer que vuelva abajo
+  mano.addEventListener("animationend", function retorno() {
+    mano.classList.remove("animar-mano-subida");
+    mano.classList.add("animar-mano-retorno");
+
+    mano.addEventListener("animationend", function ocultar() {
+      mano.classList.remove("animar-mano-retorno");
+      mano.style.display = "none";
+      mano.removeEventListener("animationend", ocultar);
+    });
+    mano.removeEventListener("animationend", retorno);
+  });
 }
 
 function parsearProbabilidades() {
@@ -154,6 +192,7 @@ function sorteoPonderado() {
 }
 
 btnAgregar.addEventListener("click", () => {
+  cursor.classList.add('ocultar');
   const nombre = inputNombre.value.trim();
   const posicion = parseInt(inputPosicion.value) - 1;
   if (!nombre || isNaN(posicion) || posicion < 0 || posicion >= cardsTotales) return;
@@ -163,13 +202,20 @@ btnAgregar.addEventListener("click", () => {
   mostrarManoSobreElemento(celda);
 
   reproducirAudio(posicion + 1); // +1 porque los audios van de 1 a 20
+  setTimeout(() => {
+    cursor.classList.remove('ocultar');
+  }, 2000); // se vuelve a mostrar luego de 1 segundo (ajústalo si es necesario)
 });
 
 btnGenerarTablero.addEventListener("click", crearTablero);
 btnLimpiar.addEventListener("click", crearTablero);
-btnTerminar.addEventListener("click", () => (intervaloActivo = false));
+btnTerminar.addEventListener("click", () => {
+  intervaloActivo = false;
+  cursor.classList.remove('ocultar');
+  });
 
 btnEmpezar.addEventListener("click", async () => {
+  cursor.classList.add('ocultar');
   if (intervaloActivo) return;
   intervaloActivo = true;
   parsearProbabilidades();
@@ -203,7 +249,6 @@ btnEmpezar.addEventListener("click", async () => {
         if (intentos > 100) return;
         continue;
       }
-
       break;
     } while (true);
 
@@ -354,5 +399,4 @@ document.addEventListener("DOMContentLoaded", () => {
     chkCamara.addEventListener('change', configurarFondoCamara);
   }
 });
-
 
