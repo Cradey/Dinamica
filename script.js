@@ -41,14 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // if (x > rect.right) x = rect.right;
 
     // Limitar verticalmente SOLO A LA MITAD INFERIOR
-    const mitad = rect.top + rect.height / 2 - 50;
+    const mitad = rect.top + rect.height / 2;
     if (y < mitad) y = mitad;
     if (y > rect.bottom) y = rect.bottom;
 
     const offsetX = cursor.offsetWidth / 2;
     const offsetY = cursor.offsetHeight / 2;
 
-    cursor.style.transform = `translate(${x - offsetX - 330}px, ${y - offsetY - 50}px)`;
+    cursor.style.transform = `translate(${x - offsetX - 330}px, ${y - offsetY - 20}px)`;
   });
 });
 
