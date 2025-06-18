@@ -23,6 +23,7 @@ html, body {
 
 /* Simula el dispositivo */
 .pantalla {
+  outline: 2px dashed red;
   width: 400px;
   height: 711px;
   background-image: url('fondop.jpg');
@@ -39,8 +40,22 @@ html, body {
   overflow: hidden;
   position: relative;
   padding-top: 2px;
+  cursor: none;
 }
 
+#custom-cursor {
+    position: absolute;
+    width: 300px;
+    height: 500px;
+    pointer-events: none;
+    background: url('mano2.png') no-repeat center center;
+    background-size: contain;
+    z-index: 999;
+}
+
+#custom-cursor.ocultar {
+  display: none; /* o visibility: hidden; o opacity: 0 */
+}
 /* Cámara ocupa el 40% superior */
 .fondo-camara {
   position: fixed;
@@ -292,24 +307,7 @@ html, body {
   color: #333;
 }
 
-/* Mini checks */
-/* .mini-cuadros {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1px;
-  margin-top: 4px;
-}
 
-.mini-cuadro {
-  width: 100%;
-  height: 5px;
-  background-color: #ddd;
-  border: 1px solid #ccc;
-}
-
-.mini-cuadro.check {
-  background-color: #4caf50;
-} */
 
 .mini-cuadros {
   position: absolute;
@@ -348,7 +346,7 @@ html, body {
 /* Animación de la mano */
 .mano-img {
   position: fixed;
-  height: 140px;
+  height: 500px;
   width: auto;
   object-fit: contain;
   pointer-events: none;
@@ -356,6 +354,40 @@ html, body {
   z-index: 999;
   transition: top 0.3s ease, left 0.3s ease;
 }
+
+.animar-mano-subida {
+  animation: subirMano 0.6s ease-out forwards;
+}
+
+.animar-mano-retorno {
+  animation: bajarMano 0.6s ease-in forwards;
+}
+
+@keyframes subirMano {
+  0% {
+    top: 100%;
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    /* la posición ya fue seteada con JS, solo llega ahí */
+    transform: scale(1.1) rotate(-10deg);
+  }
+}
+
+@keyframes bajarMano {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    top: 100%;
+    opacity: 1;
+    transform: scale(0.9) rotate(10deg);
+  }
+}
+
 
 .animar-mano {
   transform: scale(1.2);
