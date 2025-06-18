@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const offsetX = cursor.offsetWidth / 2;
     const offsetY = cursor.offsetHeight / 2;
 
-    cursor.style.transform = `translate(${x - offsetX - 330}px, ${y - offsetY - 20}px)`;
+    cursor.style.transform = `translate(${x - offsetX - 330}px, ${y - offsetY }px)`;
   });
 });
 
